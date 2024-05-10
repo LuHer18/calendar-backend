@@ -8,16 +8,13 @@ const Evento = require('../models/Evento')
 
 //getEventos
 
-const getEventos = (req, res = response) => {
+const getEventos = async(req, res = response) => {
 
-    uid = req.uid;
-    name = req.name;
-
+    const eventos = await Evento.find()
+                                .populate('user', 'name')
     res.status(201).json({
         ok:true,
-        msg: 'getEventos',
-        uid,
-        name
+        eventos
         
     })
 
@@ -46,14 +43,11 @@ const crearEvento = async(req, res = response) => {
 
 const actualizarEvento = (req, res = response) => {
 
-    uid = req.uid;
-    name = req.name;
 
-    res.status(201).json({
+    res.json({
         ok:true,
         msg: 'Actualizar evento',
-        uid,
-        name
+
         
     })
 
